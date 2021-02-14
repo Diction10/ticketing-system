@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <h1> Search Page</h1>
+
+  <p>This page will show the available flights </p>
+  <h1> {{ current_user.username }}</h1>
+
+
+
+       <table class="table table-striped">
+           <thead>
+               <tr>
+                    <td> Take-off Point  </td>
+                    <td> Destination </td>
+                    <td> Ticket Number </td>
+                    <td> Date of Flight </td>
+               </tr>
+              
+           </thead>
+
+           <tbody>
+            {% for flight in flights %} 
+               <tr>
+                   <td> {{ flight.take_off }} </td>
+                   <td> {{ flight.destination }} </td>
+                   <td> {{ flight.ticket_num }} </td>
+                   <td> {{ flight.date_of_flight }} </td>
+               </tr>
+            {% endfor %}
+           </tbody>
+       </table>
+{% endblock body %}

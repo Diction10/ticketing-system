@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <h1>Home Page</h1>
+
+       <table class="table table-striped">
+           <thead>
+               <tr>
+                    <td>  Registered Users </td>
+                    <td>  Number of Tickets Bought  </td>
+                    <td>  Today's Date </td>
+               </tr>
+              
+           </thead>
+
+           <tbody>
+        
+               <tr>
+                   <td> {{ users }} </td>
+                   <td> {{ tickets }} </td>
+                   <td> {{ date }} </td>
+               </tr>
+           </tbody>
+       </table>
+{% endblock body %}

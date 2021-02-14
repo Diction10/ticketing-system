@@ -1,0 +1,58 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+   <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4"> Book Ticket Here </legend>
+                <div>
+                    {{ form.take_off.label(class="form-control-label") }}
+                    
+                    {% if form.take_off.errors %}
+                        {{ form.take_off(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.take_off.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.take_off(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.destination.label(class="form-control-label") }}
+                    
+                    {% if form.destination.errors %}
+                        {{ form.destination(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.destination.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.destination(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.date_of_flight.label(class="form-control-label") }}
+                    
+                    {% if form.date_of_flight.errors %}
+                        {{ form.date_of_flight(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.date_of_flight.errors %}
+                                <span> {{ error }} </span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.date_of_flight(class="form-control form-control-lg", placeholder='yyyy-mm-dd') }}
+                    {% endif %}
+                </div>
+                
+            </fieldset>
+            <div>
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+{% endblock body %}
