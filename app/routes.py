@@ -12,27 +12,6 @@ from flask_mail import Message
 
 
 
-# Dummy data
-# flights = [
-#     {
-#         'passenger': 'Rasheed Amolegbe',
-#         'take_off': 'Ibadan',
-#         'destination': 'Abuja',
-#         'ticket_num': '001',
-#         'date_of_flight': 'March 01, 2021'
-#     },
-
-#     {
-#         'passenger': 'Fola Amolegbe',
-#         'take_off': 'Ibadan',
-#         'destination': 'Canada',
-#         'ticket_num': '002',
-#         'date_of_flight': 'March 02, 2021'
-#     }
-# ]
-
-
-
 #set route
 @app.route('/home', methods=['GET', 'POST'])
 def home():
