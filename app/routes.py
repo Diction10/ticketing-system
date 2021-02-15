@@ -11,6 +11,15 @@ from flask_login import login_user, current_user, logout_user, login_required
 from flask_mail import Message
 
 
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
+app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('EMAIL_USER')
+app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASSWORD')
+mail = Mail(app)
+
+
 # Dummy data
 # flights = [
 #     {
@@ -70,7 +79,7 @@ def register():
         flash(f'You have successfully registered { form.username.data }', 'success')
 
         #send message to user email
-        message = Message(f'You have been registered {form.first_name.data}.', recipients=[form.email.data])
+        message = Message(f'You have been registered {form.first_name.data}.', sender=os.environ.get('EMAIL_USER'), recipients=[form.email.data])
         message.body = f''' You are welcome {form.username.data}. Thanks for using our Ticketing service.
 '''
         mail.send(message)
