@@ -8,16 +8,8 @@ from sqlalchemy import func
 from app.forms import RegistrationForm, LoginForm, UpdateAccountForm, BookTicketForm, SearchForm, RequestResetForm, ResetPasswordForm
 from app.models import Users, Flights
 from flask_login import login_user, current_user, logout_user, login_required
-from flask_mail import Mail, Message
+from flask_mail import Message
 
-
-app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 587
-app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
-app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('EMAIL_USER')
-app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASSWORD')
-mail = Mail(app)
 
 
 # Dummy data
@@ -79,7 +71,7 @@ def register():
         flash(f'You have successfully registered { form.username.data }', 'success')
 
         #send message to user email
-        message = Message(f'You have been registered {form.first_name.data}.', sender=os.environ.get('EMAIL_USER'), recipients=[form.email.data])
+        message = Message(f'You have been registered {form.first_name.data}.', sender=os.environ.get('EMAIL_DEFAULT_SENDER'), recipients=[form.email.data])
         message.body = f''' You are welcome {form.username.data}. Thanks for using our Ticketing service.
 '''
         mail.send(message)
@@ -193,7 +185,7 @@ def search():
 def send_reset_email(user):
     token = user.get_reset_token()
     msg = Message('Password Reset Request',
-                  sender=os.environ.get('EMAIL_USER'),
+                  sender=os.environ.get('EMAIL_DEFAULT_SENDER'),
                   recipients=[user.email])
     msg.body = f'''To reset your password, visit:
 {url_for('reset_token', token=token, _external=True)}
